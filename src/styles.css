@@ -1,0 +1,351 @@
+/* The subset of the GCR site's styles.css that the Battle Sim page uses (default theme). */
+
+:root {
+  --bg: #070b16;
+  --bg-2: #0d1426;
+  --panel: #111a30;
+  --panel-2: #16223e;
+  --border: #243152;
+  --text: #e6ecf7;
+  --text-dim: #8fa0c0;
+  --accent: #4da3ff;
+  --accent-2: #7c5cff;
+  --pos: #4ade80;
+  --neg: #f87171;
+  --warn: #fb923c;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* elevation: layered shadows for depth on an otherwise flat dark theme */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Source Sans 3", system-ui, -apple-system, sans-serif;
+}
+
+.btn {
+  border: 1px solid var(--border);
+  background: var(--panel-2);
+  color: var(--text);
+  padding: 6px 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease, transform 0.1s ease;
+  font-size: 14px;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+  filter: brightness(1.1);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: none;
+  filter: brightness(0.95);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-sm {
+  padding: 3px 7px;
+  font-size: 13px;
+}
+
+.btn-primary, .btn-secondary {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.btn-ghost {
+  background: transparent;
+  box-shadow: none;
+}
+
+.btn-ghost:hover:not(:disabled) {
+  box-shadow: none;
+  filter: none;
+}
+
+input {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 7px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+textarea {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 7px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.error {
+  background: rgba(248, 113, 113, 0.12);
+  border: 1px solid rgba(248, 113, 113, 0.4);
+  color: #fecaca;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.notice {
+  background: rgba(77, 163, 255, 0.12);
+  border: 1px solid rgba(77, 163, 255, 0.4);
+  color: #cfe3ff;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 17px;
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.toolsbar {
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+
+.toolsbar__brand {
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+.toolsbar__title {
+  color: var(--text-dim);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.topbar-brand {
+  font-family: "Exo 2", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 17px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.content > * {
+  min-width: 0;
+}
+
+.content--wide {
+  max-width: 1500px;
+}
+
+.turn-actions {
+  display: flex;
+  gap: 7px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 16px 18px;
+  max-width: 100%;
+  overflow-x: auto;
+  /* Per spec, a browser can't leave overflow-y "visible" while overflow-x is
+     "auto" — it silently treats both as auto, so any panel that's even 1px
+     taller than its box (rounding, borders) gets a stray vertical scrollbar.
+     Panels never need to scroll vertically, only wide tables scroll sideways. */
+  overflow-y: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.panel-title {
+  position: relative;
+  font-family: "Exo 2", sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.01em;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  padding-right: 20px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.panel-title::after, .panel-title::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 7px;
+  height: 9px;
+  clip-path: polygon(40% 0, 100% 0, 60% 100%, 0% 100%);
+  background: var(--accent);
+}
+
+.panel-title::before {
+  right: 9px;
+  opacity: 0.35;
+}
+
+.panel-title::after {
+  right: 0;
+  opacity: 0.2;
+}
+
+.hint {
+  color: var(--text-dim);
+  font-size: 13px;
+  margin: -4px 0 10px;
+}
+
+.colony-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.colony-table th {
+  text-align: left;
+  color: var(--text-dim);
+  font-weight: 700;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.colony-table thead tr {
+  --thead-tint: color-mix(in srgb, color-mix(in srgb, var(--accent) 16%, var(--panel-2)) 80%, black 20%);
+  background: linear-gradient(90deg, var(--thead-tint) 0%, var(--panel-2) 60px);
+}
+
+.colony-table thead th {
+  color: var(--accent);
+  padding: 9px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.colony-table td {
+  padding: 9px 10px;
+  border-bottom: 1px solid rgba(36, 49, 82, 0.5);
+  transition: background-color 0.1s ease;
+}
+
+.colony-table tbody tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.colony-table tr:hover td {
+  background: var(--panel-2);
+}
+
+.mono {
+  font-family: var(--mono);
+}
+
+.market-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 7px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.market-field__label { color: var(--text-dim); font-size: 13px; }
+
+.market-field input { width: 140px; text-align: right; }
+
+.attack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 11px;
+  align-items: start;
+}
+
+.attack-actions { display: flex; justify-content: center; gap: 10px; margin-top: 10px; }
+
+.battle-log {
+  max-height: 320px;
+  overflow-y: auto;
+  font-size: 13px;
+}
+
+.battle-log-line {
+  margin: 3px 0;
+}
+
+.battle-log-line--muted {
+  color: var(--text-dim);
+}
+
+.battle-log-line--wiped {
+  color: var(--neg);
+  font-weight: 700;
+}
+
+select {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 6px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+select:focus { outline: none; border-color: var(--accent); }
+
+@media (max-width: 640px) {
+  .content {
+    padding: 10px;
+    gap: 10px;
+  }
+}
